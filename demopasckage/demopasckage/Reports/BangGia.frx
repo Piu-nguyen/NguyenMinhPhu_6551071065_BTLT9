@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" DoublePass="true">
+  <Dictionary>
+    <TableDataSource Name="SanPham" ReferenceName="SanPham" DataType="System.Int32" Enabled="true">
+      <Column Name="MaSanPham" DataType="System.Int32"/>
+      <Column Name="TenSanPham" DataType="System.String"/>
+      <Column Name="TenDanhMuc" DataType="System.String"/>
+      <Column Name="DonGia" DataType="System.Decimal"/>
+      <Column Name="SoLuongTon" DataType="System.Int32"/>
+    </TableDataSource>
+    <Parameter Name="NgayIn" DataType="System.String"/>
+    <Total Name="TongTonKho" Expression="[SanPham.SoLuongTon]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="75.6">
+      <TextObject Name="Title" Width="718.2" Height="37.8" Text="BẢNG GIÁ SẢN PHẨM" HorzAlign="Center" Font="Arial, 18pt, style=Bold"/>
+      <TextObject Name="Printed" Top="47.25" Width="718.2" Height="18.9" Text="Ngày in: [NgayIn] — Đơn vị: VNĐ" HorzAlign="Right" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="28.35">
+      <TextObject Name="H1" Width="56.7" Height="28.35" Text="Mã" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H2" Left="56.7" Width="283.5" Height="28.35" Text="Tên sản phẩm" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H3" Left="340.2" Width="170.1" Height="28.35" Text="Danh mục" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H4" Left="510.3" Width="113.4" Height="28.35" Text="Đơn giá" HorzAlign="Right" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H5" Left="623.7" Width="94.5" Height="28.35" Text="Tồn kho" HorzAlign="Right" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Width="718.2" Height="28.35" DataSource="SanPham" CanGrow="true">
+      <TextObject Name="D1" Width="56.7" Height="28.35" Text="[SanPham.MaSanPham]" Font="Arial, 10pt"/>
+      <TextObject Name="D2" Left="56.7" Width="283.5" Height="28.35" Text="[SanPham.TenSanPham]" CanGrow="true" Font="Arial, 10pt"/>
+      <TextObject Name="D3" Left="340.2" Width="170.1" Height="28.35" Text="[SanPham.TenDanhMuc]" Font="Arial, 10pt"/>
+      <TextObject Name="D4" Left="510.3" Width="113.4" Height="28.35" Text="[SanPham.DonGia]" HorzAlign="Right" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" Font="Arial, 10pt"/>
+      <TextObject Name="D5" Left="623.7" Width="94.5" Height="28.35" Text="[SanPham.SoLuongTon]" HorzAlign="Right" Font="Arial, 10pt"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Width="718.2" Height="37.8">
+      <TextObject Name="Total" Top="9.45" Width="718.2" Height="18.9" Text="Tổng tồn kho: [TongTonKho]" HorzAlign="Right" Font="Arial, 11pt, style=Bold"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Width="718.2" Height="28.35">
+      <TextObject Name="PageNumber" Width="718.2" Height="18.9" Text="Trang [Page] / [TotalPages]" HorzAlign="Center" Font="Arial, 9pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

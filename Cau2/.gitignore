@@ -1,0 +1,5 @@
+.vs/
+.tools/
+**/bin/
+**/obj/
+**/*.csproj.user

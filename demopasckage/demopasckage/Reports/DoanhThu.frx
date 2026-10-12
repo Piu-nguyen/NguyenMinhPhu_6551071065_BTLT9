@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" DoublePass="true">
+  <Dictionary>
+    <BusinessObjectDataSource Name="DoanhThu" ReferenceName="DoanhThu" DataType="System.Collections.Generic.List`1[[Tao_Xuat_Report_Chap9.Models.DoanhThuDong, demopasckage]]" Enabled="true">
+      <Column Name="TenDanhMuc" DataType="System.String"/>
+      <Column Name="TenSanPham" DataType="System.String"/>
+      <Column Name="MaHoaDon" DataType="System.Int32"/>
+      <Column Name="NgayLap" DataType="System.DateTime"/>
+      <Column Name="SoLuong" DataType="System.Int32"/>
+      <Column Name="ThanhTien" DataType="System.Decimal"/>
+    </BusinessObjectDataSource>
+    <Parameter Name="TuNgay" DataType="System.String"/>
+    <Parameter Name="DenNgay" DataType="System.String"/>
+    <Total Name="TongNhom" Expression="[DoanhThu.ThanhTien]" Evaluator="Data1" PrintOn="GroupFooter1"/>
+    <Total Name="SoDongNhom" TotalType="Count" Evaluator="Data1" PrintOn="GroupFooter1"/>
+    <Total Name="TrungBinhNhom" TotalType="Avg" Expression="[DoanhThu.ThanhTien]" Evaluator="Data1" PrintOn="GroupFooter1"/>
+    <Total Name="TongCong" Expression="[DoanhThu.ThanhTien]" Evaluator="Data1" PrintOn="ReportSummary1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="75.6">
+      <TextObject Name="Title" Width="718.2" Height="37.8" Text="BÁO CÁO DOANH THU" HorzAlign="Center" Font="Arial, 18pt, style=Bold"/>
+      <TextObject Name="Range" Top="47.25" Width="718.2" Height="18.9" Text="Từ [TuNgay] đến [DenNgay] — Đơn vị: VNĐ" HorzAlign="Center" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="28.35">
+      <TextObject Name="H1" Width="302.4" Height="28.35" Text="Sản phẩm" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H2" Left="302.4" Width="75.6" Height="28.35" Text="Mã HĐ" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H3" Left="378" Width="132.3" Height="28.35" Text="Ngày lập" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H4" Left="510.3" Width="75.6" Height="28.35" Text="SL" HorzAlign="Right" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="H5" Left="585.9" Width="132.3" Height="28.35" Text="Thành tiền" HorzAlign="Right" Fill.Color="LightGray" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <GroupHeaderBand Name="GroupHeader1" Width="718.2" Height="28.35" Condition="[DoanhThu.TenDanhMuc]" RepeatOnEveryPage="true">
+      <TextObject Name="GroupName" Width="718.2" Height="28.35" Text="Danh mục: [DoanhThu.TenDanhMuc]" Font="Arial, 11pt, style=Bold"/>
+      <DataBand Name="Data1" Width="718.2" Height="28.35" DataSource="DoanhThu" CanGrow="true">
+        <TextObject Name="D1" Width="302.4" Height="28.35" Text="[DoanhThu.TenSanPham]" CanGrow="true" Font="Arial, 10pt"/>
+        <TextObject Name="D2" Left="302.4" Width="75.6" Height="28.35" Text="[DoanhThu.MaHoaDon]" Font="Arial, 10pt"/>
+        <TextObject Name="D3" Left="378" Width="132.3" Height="28.35" Text="[DoanhThu.NgayLap]" Format="Date" Format.Format="dd/MM/yyyy" Font="Arial, 10pt"/>
+        <TextObject Name="D4" Left="510.3" Width="75.6" Height="28.35" Text="[DoanhThu.SoLuong]" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="D5" Left="585.9" Width="132.3" Height="28.35" Text="[DoanhThu.ThanhTien]" HorzAlign="Right" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" Font="Arial, 10pt"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Width="718.2" Height="56.7">
+        <TextObject Name="GroupCount" Width="378" Height="18.9" Text="Số dòng: [SoDongNhom]" Font="Arial, 10pt"/>
+        <TextObject Name="GroupSum" Left="378" Width="340.2" Height="18.9" Text="[TongNhom]" HorzAlign="Right" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="AvgLabel" Top="28.35" Width="378" Height="18.9" Text="Trung bình thành tiền / dòng:" Font="Arial, 10pt"/>
+        <TextObject Name="GroupAvg" Left="378" Top="28.35" Width="340.2" Height="18.9" Text="[TrungBinhNhom]" HorzAlign="Right" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" Font="Arial, 10pt"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+    <ReportSummaryBand Name="ReportSummary1" Width="718.2" Height="37.8">
+      <TextObject Name="TotalLabel" Top="9.45" Width="378" Height="18.9" Text="TỔNG CỘNG:" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Total" Left="378" Top="9.45" Width="340.2" Height="18.9" Text="[TongCong]" HorzAlign="Right" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" Font="Arial, 12pt, style=Bold"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Width="718.2" Height="28.35">
+      <TextObject Name="PageNumber" Width="718.2" Height="18.9" Text="Trang [Page] / [TotalPages]" HorzAlign="Center" Font="Arial, 9pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>
